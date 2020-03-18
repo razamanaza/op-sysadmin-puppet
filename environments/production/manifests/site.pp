@@ -5,6 +5,7 @@ node 'mgmt-b.foo.org.nz' {
   include puppet
   include users
   include localtimezone
+  include nagios
 }
 
 node 'back-b.foo.org.nz' {
