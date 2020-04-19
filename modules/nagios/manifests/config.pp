@@ -100,7 +100,7 @@ class nagios::config {
     service_description => "Maria DB servers",
     hostgroup_name => "db-servers",
     target => "/etc/nagios3/conf.d/ppt_services.cfg",
-    check_command => "check_mysql",
+    check_command => "check_mysql_cmdlinecred!nagios!12345",
     max_check_attempts => 3,
     retry_check_interval => 1,
     normal_check_interval => 5,
