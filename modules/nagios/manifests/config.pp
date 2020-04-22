@@ -81,6 +81,12 @@ class nagios::config {
     alias => "Database servers",
     members => "db-b.foo.org.nz",
   }
+  nagios_hostgroup {"remote_disks_servers":
+    target => "/etc/nagios3/conf.d/ppt_hostgroups.cfg",
+    mode => "0444",
+    alias => "Remote disks servers",
+    members => "db-b.foo.org.nz, apps-b.foo.org.nz, back-b.foo.org.nz",
+  }
   nagios_service {"ssh":
     service_description => "ssh servers",
     hostgroup_name => "my-ssh-servers",
@@ -101,6 +107,21 @@ class nagios::config {
     hostgroup_name => "db-servers",
     target => "/etc/nagios3/conf.d/ppt_services.cfg",
     check_command => "check_mysql_cmdlinecred!nagios!12345",
+    max_check_attempts => 3,
+    retry_check_interval => 1,
+    normal_check_interval => 5,
+    check_period => "24x7",
+    notification_interval => 30,
+    notification_period => "24x7",
+    notification_options => "w,u,c",
+    contact_groups => "admins",
+    mode => "0444",
+  }
+  nagios_service {"remote_disks":
+    service_description => "Remote disks",
+    hostgroup_name => "remote_disks_servers",
+    target => "/etc/nagios3/conf.d/ppt_services.cfg",
+    check_command => "check_nrpe!check_sda1",
     max_check_attempts => 3,
     retry_check_interval => 1,
     normal_check_interval => 5,

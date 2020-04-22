@@ -15,6 +15,7 @@ node 'back-b.foo.org.nz' {
   include puppet
   include users
   include localtimezone
+  include nrpe_server
 }
 
 node 'app-b.foo.org.nz' {
@@ -24,6 +25,7 @@ node 'app-b.foo.org.nz' {
   include puppet
   include users
   include localtimezone
+  include nrpe_server
 }
 
 node 'db-b.foo.org.nz' {
@@ -34,6 +36,7 @@ node 'db-b.foo.org.nz' {
   include users
   include puppet
   include localtimezone
+  include nrpe_server
 }
 
 

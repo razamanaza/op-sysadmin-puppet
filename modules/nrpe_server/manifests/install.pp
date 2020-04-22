@@ -1,10 +1,7 @@
-class nagios::install {
-  package { "nagios3" :
+class nrpe_server::install {
+  package {"nagios-nrpe-server" :
     ensure => present,
     require => User["nagios"],
-  }
-  package { "nagios-nrpe-plugin" :
-    ensure => present,
   }
   user { "nagios":
     ensure => present,
@@ -17,4 +14,3 @@ class nagios::install {
     ensure => present,
   }
 }
-
