@@ -81,7 +81,7 @@ class nagios::config {
     alias => "Database servers",
     members => "db-b.foo.org.nz",
   }
-  nagios_hostgroup {"remote_disks_servers":
+  nagios_hostgroup {"remote_checks_servers":
     target => "/etc/nagios3/conf.d/ppt_hostgroups.cfg",
     mode => "0444",
     alias => "Remote disks servers",
@@ -119,7 +119,7 @@ class nagios::config {
   }
   nagios_service {"remote_disks":
     service_description => "Remote disks",
-    hostgroup_name => "remote_disks_servers",
+    hostgroup_name => "remote_checks_servers",
     target => "/etc/nagios3/conf.d/ppt_services.cfg",
     check_command => "check_nrpe!check_sda1",
     max_check_attempts => 3,
@@ -132,6 +132,67 @@ class nagios::config {
     contact_groups => "admins",
     mode => "0444",
   }
+  nagios_service {"remote_load":
+    service_description => "Remote load",
+    hostgroup_name => "remote_checks_servers",
+    target => "/etc/nagios3/conf.d/ppt_services.cfg",
+    check_command => "check_nrpe!check_load",
+    max_check_attempts => 3,
+    retry_check_interval => 1,
+    normal_check_interval => 5,
+    check_period => "24x7",
+    notification_interval => 30,
+    notification_period => "24x7",
+    notification_options => "w,u,c",
+    contact_groups => "admins",
+    mode => "0444",
+  }
+  nagios_service {"remote_users":
+    service_description => "Remote users",
+    hostgroup_name => "remote_checks_servers",
+    target => "/etc/nagios3/conf.d/ppt_services.cfg",
+    check_command => "check_nrpe!check_users",
+    max_check_attempts => 3,
+    retry_check_interval => 1,
+    normal_check_interval => 5,
+    check_period => "24x7",
+    notification_interval => 30,
+    notification_period => "24x7",
+    notification_options => "w,u,c",
+    contact_groups => "admins",
+    mode => "0444",
+  } 
+  nagios_service {"remote_zombies":
+    service_description => "Remote zombies",
+    hostgroup_name => "remote_checks_servers",
+    target => "/etc/nagios3/conf.d/ppt_services.cfg",
+    check_command => "check_nrpe!check_zombie_procs",
+    max_check_attempts => 3,
+    retry_check_interval => 1,
+    normal_check_interval => 5,
+    check_period => "24x7",
+    notification_interval => 30,
+    notification_period => "24x7",
+    notification_options => "w,u,c",
+    contact_groups => "admins",
+    mode => "0444",
+  }
+  nagios_service {"remote_processes":
+    service_description => "Remote processes",
+    hostgroup_name => "remote_checks_servers",
+    target => "/etc/nagios3/conf.d/ppt_services.cfg",
+    check_command => "check_nrpe!check_total_procs",
+    max_check_attempts => 3,
+    retry_check_interval => 1,
+    normal_check_interval => 5,
+    check_period => "24x7",
+    notification_interval => 30,
+    notification_period => "24x7",
+    notification_options => "w,u,c",
+    contact_groups => "admins",
+    mode => "0444",
+  }
+
 }
 
 
