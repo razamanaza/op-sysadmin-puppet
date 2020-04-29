@@ -6,6 +6,12 @@ class nagios::install {
   package { "nagios-nrpe-plugin" :
     ensure => present,
   }
+  package { "libwww-perl" :
+    ensure => present,
+  }
+  package { "libcrypt-ssleay-perl" :
+    ensure => present,
+  }
   user { "nagios":
     ensure => present,
     comment => "Nagios3 user",

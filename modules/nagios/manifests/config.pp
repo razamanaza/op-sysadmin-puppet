@@ -19,6 +19,26 @@ class nagios::config {
     notify => Class['nagios::service'],
   }
 
+  file {'/etc/nagios-plugins/config/slack.cfg':
+    ensure => present,
+    source => 'puppet:///modules/nagios/slack.cfg',
+    mode => '0644',
+    owner => 'root',
+    group => 'root',
+    require => Class['nagios::install'],
+    notify => Class['nagios::service'],
+  }
+
+  file {'/usr/lib/nagios/plugins/nagios.pl':
+    ensure => present,
+    source => 'puppet:///modules/nagios/nagios.pl',
+    mode => '0755',
+    owner => 'root',
+    group => 'root',
+    require => Class['nagios::install'],
+    notify => Class['nagios::service'],
+  }
+
   file {'/etc/nagios3/conf.d':
     ensure => directory,
     group => 'puppet',
@@ -34,6 +54,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "d,u,r",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_host { "apps-b.foo.org.nz":
@@ -45,6 +66,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "d,u,r",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_host { "back-b.foo.org.nz":
@@ -56,6 +78,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "d,u,r",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_host { "mgmt-b.foo.org.nz":
@@ -67,6 +90,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "d,u,r",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_hostgroup {"my-ssh-servers":
@@ -99,7 +123,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "w,u,c",
-    contact_groups => "admins",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_service {"mariadb":
@@ -114,7 +138,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "w,u,c",
-    contact_groups => "admins",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_service {"remote_disks":
@@ -129,7 +153,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "w,u,c",
-    contact_groups => "admins",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_service {"remote_load":
@@ -144,7 +168,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "w,u,c",
-    contact_groups => "admins",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_service {"remote_users":
@@ -159,7 +183,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "w,u,c",
-    contact_groups => "admins",
+    contact_groups => "slackgroup",
     mode => "0444",
   } 
   nagios_service {"remote_zombies":
@@ -174,7 +198,7 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "w,u,c",
-    contact_groups => "admins",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
   nagios_service {"remote_processes":
@@ -189,10 +213,44 @@ class nagios::config {
     notification_interval => 30,
     notification_period => "24x7",
     notification_options => "w,u,c",
-    contact_groups => "admins",
+    contact_groups => "slackgroup",
     mode => "0444",
   }
+  nagios_service {"logged_in_users":
+    service_description => "Number of active users",
+    hostgroup_name => "remote_checks_servers",
+    target => "/etc/nagios3/conf.d/ppt_services.cfg",
+    check_command => "check_nrpe!check_logged_users",
+    max_check_attempts => 3,
+    retry_check_interval => 1,
+    normal_check_interval => 5,
+    check_period => "24x7",
+    notification_interval => 10,
+    notification_period => "24x7",
+    notification_options => "w,u,c",
+    contact_groups => "slackgroup",
+    mode => "0444",
+  }
+  
 
+  nagios_contact { "slack":
+    target => "/etc/nagios3/conf.d/ppt_contacts.cfg",
+    alias => "Slack",
+    service_notification_period => "24x7",
+    host_notification_period => "24x7",
+    service_notification_options => "w,u,c,r",
+    host_notification_options => "d,r",
+    service_notification_commands => "notify-service-by-slack",
+    host_notification_commands => "notify-host-by-slack",
+    email => "root@localhost",
+    mode => "0444",
+  }
+  nagios_contactgroup { "slackgroup":
+    target => "/etc/nagios3/conf.d/ppt_contactgroups.cfg",
+    alias => "Slack channel",
+    members => "slack",
+    mode => "0444",
+  }
 }
 
 
