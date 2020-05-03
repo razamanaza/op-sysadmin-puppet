@@ -6,6 +6,7 @@ node 'mgmt-b.foo.org.nz' {
   include users
   include localtimezone
   include nagios
+  include nagios_alert_check
 }
 
 node 'back-b.foo.org.nz' {
@@ -16,6 +17,7 @@ node 'back-b.foo.org.nz' {
   include users
   include localtimezone
   include nrpe_server
+  include nagios_alert_check
 }
 
 node 'app-b.foo.org.nz' {
@@ -26,6 +28,7 @@ node 'app-b.foo.org.nz' {
   include users
   include localtimezone
   include nrpe_server
+  include nagios_alert_check
 }
 
 node 'db-b.foo.org.nz' {
@@ -37,6 +40,7 @@ node 'db-b.foo.org.nz' {
   include puppet
   include localtimezone
   include nrpe_server
+  include nagios_alert_check
 }
 
 
