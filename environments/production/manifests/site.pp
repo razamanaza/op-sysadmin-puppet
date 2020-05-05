@@ -6,6 +6,7 @@ node 'mgmt-b.foo.org.nz' {
   include users
   include localtimezone
   include nagios
+  include nrpe_server
   include nagios_alert_check
 }
 

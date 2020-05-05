@@ -24,4 +24,12 @@ class nrpe_server::config {
     group => "root",
     require => Class["nrpe_server::install"],
   }
+  file {"/usr/lib/nagios/plugins/check_service.sh":
+    ensure => present,
+    source => "puppet:///modules/nrpe_server/check_service.sh",
+    mode => "0755",
+    owner => "root",
+    group => "root",
+    require => Class["nrpe_server::install"],
+  }
 }
