@@ -7,6 +7,10 @@ class nrpe_server::config {
     $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 180 -c 220"
     $check_users = "/usr/lib/nagios/plugins/check_users -w 5 -c 10"
     $check_load = "/usr/lib/nagios/plugins/check_load -r -w .15,.10,.05 -c .30,.25,.20"
+  } elsif $hostname == 'db-b' {
+    $check_users = "/usr/lib/nagios/plugins/check_users -w 5 -c 10"
+    $check_load = "/usr/lib/nagios/plugins/check_load -r -w .15,.10,.05 -c .30,.25,.20"
+    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 155 -c 200"
   } else {
     $check_users = "/usr/lib/nagios/plugins/check_users -w 5 -c 10"
     $check_load = "/usr/lib/nagios/plugins/check_load -r -w .15,.10,.05 -c .30,.25,.20"
