@@ -30,6 +30,8 @@ node 'app-b.foo.org.nz' {
   include localtimezone
   include nrpe_server
   include nagios_alert_check
+  include lap
+  include own_cloud
 }
 
 node 'db-b.foo.org.nz' {
