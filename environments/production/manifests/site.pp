@@ -32,6 +32,7 @@ node 'app-b.foo.org.nz' {
   include nagios_alert_check
   include lap
   include own_cloud
+  include bkp
 }
 
 node 'db-b.foo.org.nz' {

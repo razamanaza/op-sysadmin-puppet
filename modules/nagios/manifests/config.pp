@@ -241,6 +241,22 @@ class nagios::config {
     contact_groups => "slackgroup",
     mode => "0444",
   }
+  nagios_service {"backup_check":
+    service_description => "Last backup check",
+    hostgroup_name => "remote_checks_servers",
+    target => "/etc/nagios3/conf.d/ppt_services.cfg",
+    check_command => "check_nrpe!check_backup",
+    max_check_attempts => 3,
+    retry_check_interval => 1,
+    normal_check_interval => 1,
+    check_interval => 1,
+    check_period => "24x7",
+    notification_interval => 60,
+    notification_period => "24x7",
+    notification_options => "w,u,c",
+    contact_groups => "slackgroup",
+    mode => "0444",
+  }
 
   nagios_service {"nagios_check":
     service_description => "Nagios alerts check",
