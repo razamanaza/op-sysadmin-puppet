@@ -4,6 +4,9 @@ if [ "$?" -ne "0" ]
 then
   touch /home/student/bkpfail
 else
-  rm /home/student/bkpfail
+  if [ -f '/home/student/bkpfail' ]
+    then
+    rm /home/student/bkpfail
+  fi
 fi
 

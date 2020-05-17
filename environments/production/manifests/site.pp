@@ -45,6 +45,7 @@ node 'db-b.foo.org.nz' {
   include localtimezone
   include nrpe_server
   include nagios_alert_check
+  include bkp
 }
 
 

@@ -8,7 +8,7 @@ class bkp::config {
   file { "/home/student/bkp.sh":
       ensure => present,
       source => "puppet:///modules/bkp/${filename}",
-      mode => "0444",
+      mode => "0755",
       owner => "root",
       group => "root",
   }
