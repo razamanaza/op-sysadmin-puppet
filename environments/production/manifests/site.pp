@@ -1,4 +1,5 @@
 node 'mgmt-b.foo.org.nz' {
+  include hosts
   include sudo
   include vim
   include ntp_service
@@ -11,6 +12,7 @@ node 'mgmt-b.foo.org.nz' {
 }
 
 node 'back-b.foo.org.nz' {
+  include hosts
   include sudo
   include vim
   include ntp_service
@@ -22,6 +24,7 @@ node 'back-b.foo.org.nz' {
 }
 
 node 'app-b.foo.org.nz' {
+  include hosts
   include sudo
   include vim
   include ntp_service
@@ -36,7 +39,8 @@ node 'app-b.foo.org.nz' {
 }
 
 node 'db-b.foo.org.nz' {
-	include sudo
+	include hosts
+  include sudo
   include vim
   include ntp_service
   include mariadb
