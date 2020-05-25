@@ -57,9 +57,9 @@ class nagios::config {
     contact_groups => "slackgroup",
     mode => "0444",
   }
-  nagios_host { "apps-b.foo.org.nz":
+  nagios_host { "app-b.foo.org.nz":
     target => "/etc/nagios3/conf.d/ppt_hosts.cfg",
-    alias => "apps",
+    alias => "app",
     check_period => "24x7",
     max_check_attempts => 3,
     check_command => "check-host-alive",
@@ -98,7 +98,7 @@ class nagios::config {
     target => "/etc/nagios3/conf.d/ppt_hostgroups.cfg",
     mode => "0444",
     alias => "My SSH servers",
-    members => "db-b.foo.org.nz, apps-b.foo.org.nz, back-b.foo.org.nz, mgmt-b.foo.org.nz",
+    members => "db-b.foo.org.nz, app-b.foo.org.nz, back-b.foo.org.nz, mgmt-b.foo.org.nz",
   }
   nagios_hostgroup {"db-servers":
     target => "/etc/nagios3/conf.d/ppt_hostgroups.cfg",
@@ -116,7 +116,7 @@ class nagios::config {
     target => "/etc/nagios3/conf.d/ppt_hostgroups.cfg",
     mode => "0444",
     alias => "Remote disks servers",
-    members => "db-b.foo.org.nz, apps-b.foo.org.nz, back-b.foo.org.nz, mgmt-b.foo.org.nz",
+    members => "db-b.foo.org.nz, app-b.foo.org.nz, back-b.foo.org.nz, mgmt-b.foo.org.nz",
   }
 
   nagios_service {"ssh":
