@@ -1,4 +1,6 @@
 class lap::config {
+   $ip = $ipaddress
+   
    file {"/etc/apache2/mods-available/dir.conf":
     ensure => present,
     source => "puppet:///modules/lap/dir.conf",
@@ -41,7 +43,7 @@ class lap::config {
   }
   file {"/etc/apache2/sites-available/000-default.conf":
     ensure => present,
-    source => "puppet:///modules/lap/000-default.conf",
+    content => template("lap/000-default.conf.erb"),
     mode => "0644",
     owner => "root",
     group => "root",

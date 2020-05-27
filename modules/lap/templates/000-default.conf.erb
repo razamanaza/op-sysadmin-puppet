@@ -8,7 +8,7 @@
 	# However, you must set it for any further virtual host explicitly.
 	#ServerName www.example.com
 
-  Redirect permanent "/" "https://app-b.foo.org.nz/"
+  Redirect permanent "/" "https://<%= @ip %>/"
 	ServerAdmin webmaster@localhost
 	DocumentRoot /var/www/owncloud
 
