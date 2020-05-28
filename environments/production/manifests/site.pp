@@ -2,6 +2,7 @@ node 'mgmt-b.foo.org.nz' {
   include hosts
   include sudo
   include vim
+  include base
   include ntp_service
   include puppet
   include users
@@ -27,6 +28,7 @@ node 'app-b.foo.org.nz' {
   include hosts
   include sudo
   include vim
+  include base
   include ntp_service
   include puppet
   include users
@@ -42,6 +44,7 @@ node 'db-b.foo.org.nz' {
 	include hosts
   include sudo
   include vim
+  include base
   include ntp_service
   include mariadb
   include users
