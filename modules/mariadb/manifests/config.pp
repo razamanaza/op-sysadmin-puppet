@@ -8,4 +8,9 @@ class mariadb::config {
       require => Class["mariadb::install"],
       notify => Class["mariadb::service"],
   }
+  firewall { '104 accept mysql':  
+    proto  => 'tcp',            
+    dport => 3306,                
+    action => 'accept',         
+  }                             
 }

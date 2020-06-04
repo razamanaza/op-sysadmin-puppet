@@ -362,6 +362,16 @@ class nagios::config {
     members => "slack",
     mode => "0444",
   }
+	firewall { '101 allow http and https access':
+    dport  => [80, 443],
+    proto  => 'tcp',
+    action => 'accept'
+	}
+	firewall { '102 allow puppet-master access':
+    dport  => 8140,
+    proto  => 'tcp',
+    action => 'accept',
+  }
 }
 
 

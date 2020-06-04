@@ -26,6 +26,11 @@ file { '/etc/ntp.conf':
     mode => '0444',
     content => template('ntp_service/ntp.conf.erb'),
   }
+firewall { '105 accept ntp':  
+  proto  => 'udp',            
+  dport => 123,                
+  action => 'accept',         
+}                             
 }
 
 class service {
