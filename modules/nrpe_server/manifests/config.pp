@@ -1,20 +1,20 @@
 class nrpe_server::config {
   if $hostname == 'mgmt-b' {
-    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 180 -c 220"
+    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 190 -c 220"
     $check_load = "/usr/lib/nagios/plugins/check_load -r -w .50,.50,.25 -c .60,.60,.30"
     $check_users = "/usr/lib/nagios/plugins/check_users -w 5 -c 10"
   } elsif $hostname == 'app-b' {
-    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 180 -c 220"
+    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 190 -c 220"
     $check_users = "/usr/lib/nagios/plugins/check_users -w 5 -c 10"
     $check_load = "/usr/lib/nagios/plugins/check_load -r -w .50,.50,.25 -c .60,.60,.30"
   } elsif $hostname == 'db-b' {
     $check_users = "/usr/lib/nagios/plugins/check_users -w 5 -c 10"
     $check_load = "/usr/lib/nagios/plugins/check_load -r -w .50,.50,.25 -c .60,.60,.30"
-    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 155 -c 200"
+    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 195 -c 200"
   } else {
     $check_users = "/usr/lib/nagios/plugins/check_users -w 5 -c 10"
     $check_load = "/usr/lib/nagios/plugins/check_load -r -w .50,.50,.25 -c .60,.60,.30"
-    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 150 -c 200"
+    $check_total_procs = "/usr/lib/nagios/plugins/check_procs -w 190 -c 200"
   }
   
   file {"/etc/nagios/nrpe.cfg":

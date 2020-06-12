@@ -15,6 +15,8 @@ node 'mgmt-b.foo.org.nz' {
 }
 
 node 'back-b.foo.org.nz' {
+  include mariadb
+  include bkp
 }
 
 node 'app-b.foo.org.nz' {

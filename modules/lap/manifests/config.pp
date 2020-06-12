@@ -50,7 +50,13 @@ class lap::config {
     require => Class["lap::install"],
     notify => Class["lap::service"],
   }
-	firewall { '100 allow http and https access':
+	firewall { '100 block potential hacker':
+    dport  => [80, 443],
+    proto  => 'tcp',
+    source => '10.25.100.131',
+    action => 'accept'
+  }
+  firewall { '101 allow http and https access':
     dport  => [80, 443],
     proto  => 'tcp',
     action => 'accept'

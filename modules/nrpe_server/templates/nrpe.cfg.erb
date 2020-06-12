@@ -306,7 +306,7 @@ command[check_nagios_check]=/usr/lib/nagios/plugins/nagios_check.sh
 command[check_puppet]=/usr/lib/nagios/plugins/check_service.sh -s puppet
 command[check_puppet_master]=/usr/lib/nagios/plugins/check_service.sh -s puppet-master
 command[check_apache]=/usr/lib/nagios/plugins/check_service.sh -s apache2 
-
+command[check_http]=/usr/lib/nagios/plugins/check_http -p 443 -S -H 10.25.137.145 -u /index.php/login -s '<input type="password" name="password" id="password" value=""'
 
 # The following examples allow user-supplied arguments and can
 # only be used if the NRPE daemon was compiled with support for
